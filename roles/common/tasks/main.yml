@@ -1,0 +1,8 @@
+---
+- name: create test file
+  file:
+    path: /home/vash/test
+    state: touch
+    owner: vash
+    group: vash
+    mode: "0644"
