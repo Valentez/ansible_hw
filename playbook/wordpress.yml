@@ -1,8 +1,11 @@
 ---
 - hosts : all
+  vars_files:
+    vault.yml
   roles:
+    - common
     - geerlingguy.mysql
 #    - geerlingguy.nginx
 #    - geerlingguy.php-versions
 #    - geerlingguy.php
- #   - makarenalabs.wordpress
+#    - makarenalabs.wordpress
