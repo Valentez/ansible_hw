@@ -2,7 +2,7 @@
 - hosts : all
   roles:
     - geerlingguy.mysql
-    - geerlingguy.nginx
-    - geerlingguy.php-versions
-    - geerlingguy.php
-    - makarenalabs.wordpress
+#    - geerlingguy.nginx
+#    - geerlingguy.php-versions
+#    - geerlingguy.php
+ #   - makarenalabs.wordpress
