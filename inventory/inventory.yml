@@ -1,0 +1,44 @@
+# YAML
+#
+all:
+  vars:
+    wp_version: 6.2
+    wp_mysql_db: "{{ vault_wp_mysql_db }}"
+    wp_mysql_user: "{{ vault_wp_mysql_user }}"
+    wp_mysql_password: "{{ vault_wp_mysql_password }}"
+    wp_webserver: nginx
+    wp_sitename: examplevash.com
+    wp_admin_email: 'your@email.com'
+    wp_install_dir: "/var/www/{{ wp_sitename }}"  
+    mysql_root_password: "{{ vault_mysql_root_password }}"
+    mysql_databases:
+      - name: "{{ wp_mysql_db }}"
+        encoding: utf8
+        collation: utf8_general_ci
+    mysql_users:
+      - name: "{{ wp_mysql_user }}"
+        host: "%"
+        password: "{{ wp_mysql_password }}"
+        priv: "{{ wp_mysql_user }}.*:ALL"
+        php_version_install_recommends: false
+        php_version: "8.1"
+        php_webserver_daemon: "nginx"
+        php_enable_php_fpm: true
+        php_fpm_state: started
+        php_fpm_enabled_on_boot: true
+        php_fpm_pools:
+          - pool_name: www
+            pool_template: www.conf.j2
+            pool_listen: "127.0.0.1:9000"
+            pool_listen_allowed_clients: "127.0.0.1"
+            pool_pm: dynamic
+            pool_pm_max_children: 5
+            pool_pm_start_servers: 2
+            pool_pm_min_spare_servers: 1
+            pool_pm_max_spare_servers: 3
+            pool_pm_max_requests: 500
+      
+  children:
+    ans:
+      hosts:
+        10.101.10.59
